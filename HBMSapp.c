@@ -75,6 +75,8 @@ int registerUser() {
 }
 
 
+
+
 int main(){
     int value;
     printf("Welcome To HouseHold Budget management System");
@@ -93,7 +95,7 @@ int main(){
     }else if(value==2){
         registerUser();
     }else{
-        printf("Wrong input");
+        printf("Unavailable Input");
     }
     printf("\n\n");
 
