@@ -50,24 +50,57 @@ void signInAuth() {
 }
 
 //expense calculator
-int userProfile(){
-    int monthlySalary, expenseAmount;
-    char expenseDiscription, dateOfExpense;
-    printf("welcome to Household Budget Management system");
-    printf("\n");
-    printf("Enter Monthly salary: ");
-    scanf("%d", &monthlySalary);
-    printf("\n");
-    printf("Enter expense discription: ");
-    scanf("%s", &expenseDiscription);
-    printf("\n");
+void userProfile() {
+    // Declare variables to store user inputs
+    float monthlySalary, expenseAmount;
+    char expenseDescription[MAX_LENGTH], dateOfExpense[MAX_LENGTH];
+
+    // Get user inputs
+    printf("Enter your monthly salary: ");
+    scanf("%f", &monthlySalary);
+
     printf("Enter expense amount: ");
-    scanf("%d", &expenseAmount);
-    printf("\n");
-    printf("Enter date of expense: ");
-    scanf("%s", &dateOfExpense);
-    return 0;
+    scanf("%f", &expenseAmount);
+
+    // Consume the newline character left in the input buffer
+    getchar();
+
+    printf("Enter expense description: ");
+    fgets(expenseDescription, MAX_LENGTH, stdin);
+
+    // Remove the newline character from expenseDescription if present
+    if (expenseDescription[strlen(expenseDescription) - 1] == '\n') {
+        expenseDescription[strlen(expenseDescription) - 1] = '\0';
+    }
+
+    printf("Enter date of expense (YYYY-MM-DD): ");
+    fgets(dateOfExpense, MAX_LENGTH, stdin);
+
+    // Remove the newline character from dateOfExpense if present
+    if (dateOfExpense[strlen(dateOfExpense) - 1] == '\n') {
+        dateOfExpense[strlen(dateOfExpense) - 1] = '\0';
+    }
+
+    // Open the file for writing in append mode
+    FILE *file = fopen("user_profile.txt", "a");
+    if (file == NULL) {
+        printf("Error: Unable to open file for writing\n");
+        return;
+    }
+
+    // Write user inputs to the file
+    fprintf(file, "Monthly Salary: %.2f\n", monthlySalary);
+    fprintf(file, "Expense Amount: %.2f\n", expenseAmount);
+    fprintf(file, "Expense Description: %s\n", expenseDescription);
+    fprintf(file, "Date of Expense: %s\n", dateOfExpense);
+
+    // Close the file
+    fclose(file);
+
+    // Display a message
+    printf("User profile saved successfully.\n");
 }
+
 
 // New User registration
 int registerUser() {
