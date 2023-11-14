@@ -102,15 +102,6 @@ int userProfile() {
     fprintf(file, "Date of Expense: %s\n", dateOfExpense);
     fprintf(file, "Saving: %.2f\n", saving);
 
-
-    // Print user information
-    //printf("\n USER DASHBOARD:\n");
-    //printf("Monthly Salary: %.2f\n", monthlySalary);
-    //printf("Expense Amount: %.2f\n", expenseAmount);
-    //printf("Expense Description: %s\n", expenseDescription);
-    //printf("Date of Expense: %s\n", dateOfExpense);
-    //printf("Saving: %.2f\n", saving);
-
     dashboard();
 
     // Close the file
