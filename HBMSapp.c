@@ -3,6 +3,7 @@
 #include <string.h>
 #define MAX_LENGTH 20
 
+int userProfile();
 
 // Function to authenticate a user
 int authenticate(const char *username, const char *password) {
@@ -30,7 +31,7 @@ int authenticate(const char *username, const char *password) {
 
 
 //user signin
-void signInAuth() {
+int signInAuth() {
     char username[MAX_LENGTH];
     char password[MAX_LENGTH];
 
@@ -47,10 +48,14 @@ void signInAuth() {
     } else {
         printf("Invalid User credentials\n");
     }
+    return 0;
 }
 
 //expense calculator
-void userProfile() {
+int userProfile() {
+
+    printf("WELCOME TO THE HOUSEHOLD BUDGET MANAGEMENT SYSTEM");
+    printf("\n");
     // Declare variables to store user inputs
     float monthlySalary, expenseAmount;
     char expenseDescription[MAX_LENGTH], dateOfExpense[MAX_LENGTH];
@@ -85,7 +90,7 @@ void userProfile() {
     FILE *file = fopen("user_profile.txt", "a");
     if (file == NULL) {
         printf("Error: Unable to open file for writing\n");
-        return;
+        return 0;
     }
 
     // Write user inputs to the file
@@ -99,6 +104,7 @@ void userProfile() {
 
     // Display a message
     printf("User profile saved successfully.\n");
+    return 0;
 }
 
 
@@ -124,9 +130,12 @@ int registerUser() {
     } else {
         printf("Error: Unable to open file for writing\n");
     }
+    return 0;
 }
 
 
+
+//Main function
 int main(){
     int value;
     printf("Welcome To HouseHold Budget management System");
