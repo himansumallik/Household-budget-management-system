@@ -43,12 +43,30 @@ void signInAuth() {
     printf("\n");
 
     if (authenticate(username, password)) {
-        printf("Login Successful\n");
+        userProfile();
     } else {
         printf("Invalid User credentials\n");
     }
 }
 
+//expense calculator
+int userProfile(){
+    int monthlySalary, expenseAmount;
+    char expenseDiscription, dateOfExpense;
+    printf("welcome to Household Budget Management system");
+    printf("\n");
+    printf("Enter Monthly salary: ");
+    scanf("%s", &monthlySalary);
+    printf("\n");
+    printf("Enter expense category: ");
+    scanf("%s", &expenseDiscription);
+    printf("\n");
+    printf("Enter expense category: ");
+    scanf("%s", &expenseAmount);
+    printf("\n");
+    printf("Enter expense category: ");
+    scanf("%s", &dateOfExpense);
+}
 
 // New User registration
 int registerUser() {
@@ -73,8 +91,6 @@ int registerUser() {
         printf("Error: Unable to open file for writing\n");
     }
 }
-
-
 
 
 int main(){
