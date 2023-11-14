@@ -93,17 +93,60 @@ int userProfile() {
         return 0;
     }
 
+    float saving = monthlySalary - expenseAmount;
+
     // Write user inputs to the file
     fprintf(file, "Monthly Salary: %.2f\n", monthlySalary);
     fprintf(file, "Expense Amount: %.2f\n", expenseAmount);
     fprintf(file, "Expense Description: %s\n", expenseDescription);
     fprintf(file, "Date of Expense: %s\n", dateOfExpense);
+    fprintf(file, "Saving: %.2f\n", saving);
+
+
+    // Print user information
+    //printf("\n USER DASHBOARD:\n");
+    //printf("Monthly Salary: %.2f\n", monthlySalary);
+    //printf("Expense Amount: %.2f\n", expenseAmount);
+    //printf("Expense Description: %s\n", expenseDescription);
+    //printf("Date of Expense: %s\n", dateOfExpense);
+    //printf("Saving: %.2f\n", saving);
+
+    dashboard();
 
     // Close the file
     fclose(file);
 
     // Display a message
     printf("User profile saved successfully.\n");
+    return 0;
+}
+
+
+int readUserProfile() {
+    // Open the file for reading
+    FILE *file = fopen("user_profile.txt", "r");
+    if (file == NULL) {
+        printf("Error: Unable to open file for reading\n");
+        return;
+    }
+
+    // Read and print information from the file
+    char buffer[MAX_LENGTH];
+    while (fgets(buffer, MAX_LENGTH, file) != NULL) {
+        printf("%s", buffer);
+    }
+
+    // Close the file
+    fclose(file);
+
+    return 0;
+}
+
+int dashboard() {
+    printf("\nDashboard:\n");
+    printf("-------------\n");
+    readUserProfile();
+    printf("-------------\n");
     return 0;
 }
 
@@ -132,7 +175,6 @@ int registerUser() {
     }
     return 0;
 }
-
 
 
 //Main function

@@ -1,4 +1,0 @@
-Monthly Salary: 5000.00
-Expense Amount: 2000.00
-Expense Description: rent
-Date of Expense: 2023-12-23
