@@ -43,12 +43,33 @@ int signInAuth() {
     printf("\n");
 
     if (authenticate(username, password)) {
-        userProfile();
+        homepage();
     } else {
         printf("Invalid User credentials\n");
     }
     return 0;
 }
+
+//page after authentication success
+int homepage(){
+    int inputValue;
+    printf("WELCOME TO HOUSEHOLD BUDGET MANAGEMENT SYSTEM");
+    printf("\n\n");
+    printf("||Your Dashboard|| <<<Enter 1>>>: ");
+    printf("\n\n");
+    printf("||Enter New Expense||<<<Enter 2>>>): ");
+    scanf("%d", &inputValue);
+    if (inputValue == 1){
+        dashboard();
+    }else if(inputValue == 2){
+        userProfile();
+    }else{
+        printf("Invalid Input")
+    }
+
+    return 0;
+}
+
 
 // Expense calculator and user profile
 int userProfile() {
