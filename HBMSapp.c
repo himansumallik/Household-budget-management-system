@@ -3,7 +3,15 @@
 
 #define MAX_LENGTH 100
 
+// Function prototypes
 int userProfile();
+int authenticate(const char *username, const char *password);
+int signInAuth();
+int homepage();
+int userProfile();
+int readUserProfile();
+int dashboard();
+int registerUser();
 
 // Function to authenticate a user
 int authenticate(const char *username, const char *password) {
@@ -50,31 +58,32 @@ int signInAuth() {
     return 0;
 }
 
-//page after authentication success
-int homepage(){
+// Page after authentication success
+int homepage() {
     int inputValue;
     printf("WELCOME TO HOUSEHOLD BUDGET MANAGEMENT SYSTEM");
-    printf("\n\n");
-    printf("||Your Dashboard|| <<<Enter 1>>>: ");
-    printf("\n\n");
-    printf("||Enter New Expense||<<<Enter 2>>>): ");
+    printf("\n");
+    printf("||Your Dashboard|| <<<Enter 1>>>");
+    printf("\n");
+    printf("||Enter New Expense|| <<<Enter 2>>>)");
+    print("\n\n")
+    printf("Your input(1 or 2): ")
     scanf("%d", &inputValue);
-    if (inputValue == 1){
+    if (inputValue == 1) {
         dashboard();
-    }else if(inputValue == 2){
+    } else if (inputValue == 2) {
         userProfile();
-    }else{
-        printf("Invalid Input")
+    } else {
+        printf("Invalid Input\n");
     }
 
     return 0;
 }
 
-
 // Expense calculator and user profile
 int userProfile() {
     printf("WELCOME TO THE HOUSEHOLD BUDGET MANAGEMENT SYSTEM\n");
-    
+
     // Declare variables to store user inputs
     float monthlySalary, expenseAmount;
     char expenseDescription[MAX_LENGTH], dateOfExpense[MAX_LENGTH];
@@ -93,23 +102,25 @@ int userProfile() {
     fgets(expenseDescription, MAX_LENGTH, stdin);
 
     // Remove the newline character from expenseDescription if present
-    if (expenseDescription[strlen(expenseDescription) - 1] == '\n') {
-        expenseDescription[strlen(expenseDescription) - 1] = '\0';
+    size_t len = strlen(expenseDescription);
+    if (len > 0 && expenseDescription[len - 1] == '\n') {
+        expenseDescription[len - 1] = '\0';
     }
 
     printf("Enter date of expense (YYYY-MM-DD): ");
     fgets(dateOfExpense, MAX_LENGTH, stdin);
 
     // Remove the newline character from dateOfExpense if present
-    if (dateOfExpense[strlen(dateOfExpense) - 1] == '\n') {
-        dateOfExpense[strlen(dateOfExpense) - 1] = '\0';
+    len = strlen(dateOfExpense);
+    if (len > 0 && dateOfExpense[len - 1] == '\n') {
+        dateOfExpense[len - 1] = '\0';
     }
 
     float saving = monthlySalary - expenseAmount;
 
     // Open the files for writing in append mode
-    FILE *userExpenseDate = fopen("userDate.txt", "a");
-    FILE *userExpenseAmount = fopen("userExpense.txt", "a");
+    FILE *userExpenseDate = fopen("userExpenseDate.txt", "a");
+    FILE *userExpenseAmount = fopen("userExpenseAmount.txt", "a");
     FILE *userExpenseDetails = fopen("userExpenseDetails.txt", "a");
     FILE *userSalary = fopen("userSalary.txt", "a");
     FILE *userSaving = fopen("userSaving.txt", "a");
@@ -155,23 +166,21 @@ int readUserProfile() {
         return 1;  // Return an error code to indicate failure
     }
 
-    int salary, expense, saving ;
-    char discription[MAX_LENGTH], date[MAX_LENGTH];
+    float salary, expense, saving;
+    char description[MAX_LENGTH], date[MAX_LENGTH];
 
     // Read and print information from the files
-    fscanf(userExpenseDate, "%s", &date);
-    fscanf(userSalary, "%d", salary);
-    fscanf(userExpenseAmount, "%d", expense);
-    fscanf(userSaving, "%d", saving);
-    fscanf(userExpenseDetails, "%s", discription);
+    fscanf(userExpenseDate, "Date of Expense: %[^\n]", date);
+    fscanf(userSalary, "Monthly Salary: %f", &salary);
+    fscanf(userExpenseAmount, "Expense Amount: %f", &expense);
+    fscanf(userSaving, "Saving: %f", &saving);
+    fscanf(userExpenseDetails, "Expense Description: %[^\n]", description);
 
-
-    printf("Salary: %d\n", salary);
-    printf("Expense Details: %s\n", discription);
+    printf("Salary: %.2f\n", salary);
+    printf("Expense Details: %s\n", description);
     printf("Date: %s\n", date);
-    printf("Expense: %d\n", expense);
-    printf("Saving: %d\n", saving);
-    
+    printf("Expense: %.2f\n", expense);
+    printf("Saving: %.2f\n", saving);
 
     // Close the files
     fclose(userExpenseDate);
@@ -220,9 +229,8 @@ int registerUser() {
 // Main function
 int main() {
     int value;
-    printf("Welcome To HouseHold Budget management System");
-    printf("\n\n");
-    printf("Existing User Sign In (Enter 1)\n");
+    printf("Welcome To HouseHold Budget Management System\n");
+    printf("\nExisting User Sign In (Enter 1)\n");
     printf("New User Register (Enter 2)\n");
 
     // User Authentication gateway
