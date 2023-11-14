@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<math.h>
+#include <string.h>
 #define MAX_LENGTH 20
 
 
@@ -23,7 +24,6 @@ int authenticate(const char *username, const char *password) {
             return 1; // Authentication successful
         }
     }
-
     fclose(file);
     return 0; // Authentication failed
 }
@@ -56,16 +56,17 @@ int userProfile(){
     printf("welcome to Household Budget Management system");
     printf("\n");
     printf("Enter Monthly salary: ");
-    scanf("%s", &monthlySalary);
+    scanf("%d", &monthlySalary);
     printf("\n");
-    printf("Enter expense category: ");
+    printf("Enter expense discription: ");
     scanf("%s", &expenseDiscription);
     printf("\n");
-    printf("Enter expense category: ");
-    scanf("%s", &expenseAmount);
+    printf("Enter expense amount: ");
+    scanf("%d", &expenseAmount);
     printf("\n");
-    printf("Enter expense category: ");
+    printf("Enter date of expense: ");
     scanf("%s", &dateOfExpense);
+    return 0;
 }
 
 // New User registration
