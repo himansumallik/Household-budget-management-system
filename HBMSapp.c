@@ -167,20 +167,21 @@ int readUserProfile() {
     }
 
     float salary, expense, saving;
-    char description[MAX_LENGTH], date[MAX_LENGTH];
+    char discription[MAX_LENGTH], date[MAX_LENGTH];
 
     // Read and print information from the files
     fscanf(userExpenseDate, "Date of Expense: %s", date);
-    fscanf(userSalary, "Monthly Salary: %.2f", &salary);
-    fscanf(userExpenseAmount, "Expense Amount: %.2f", &expense);
-    fscanf(userSaving, "Saving: %.2f", &saving);
-    fscanf(userExpenseDetails, "Expense Description: %s", description);
+    fscanf(userSalary, "Monthly Salary: %f", &salary);
+    fscanf(userExpenseAmount, "Expense Amount: %f", &expense);
+    fscanf(userSaving, "Saving: %f", &saving);
+    fscanf(userExpenseDetails, "Expense Description: %s", discription);
 
-    printf("Salary: %.2f\n", salary);
-    printf("Expense Details: %s\n", description);
-    printf("Date: %s\n", date);
-    printf("Expense: %.2f\n", expense);
-    printf("Saving: %.2f\n", saving);
+    // Print the read values
+    printf("Salary         : %.2f\n", salary);
+    printf("Expense Details: %s\n", discription);
+    printf("Date           : %s\n", date);
+    printf("Expense        : %.2f\n", expense);
+    printf("Saving         : %.2f\n", saving);
 
     // Close the files
     fclose(userExpenseDate);
@@ -194,10 +195,13 @@ int readUserProfile() {
 
 // Dashboard
 int dashboard() {
-    printf("\nDashboard:\n");
-    printf("-------------\n");
+    printf("----------------------------------\n");
+    printf("***********DASHBOARD**************\n");
+    printf("----------------------------------\n");
     readUserProfile();
-    printf("-------------\n");
+    printf("----------------------------------\n");
+    printf("**********************************\n");
+    printf("----------------------------------\n");
     return 0;
 }
 

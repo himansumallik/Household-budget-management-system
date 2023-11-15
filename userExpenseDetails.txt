@@ -1,2 +1,2 @@
-Expense Description: PÄ²zþ
-Expense Description: food
+Expense Description: rent
+Expense Description: xyz
