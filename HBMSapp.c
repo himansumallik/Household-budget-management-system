@@ -66,8 +66,8 @@ int homepage() {
     printf("||Your Dashboard|| <<<Enter 1>>>");
     printf("\n");
     printf("||Enter New Expense|| <<<Enter 2>>>)");
-    print("\n\n")
-    printf("Your input(1 or 2): ")
+    printf("\n\n");
+    printf("Your input(1 or 2): ");
     scanf("%d", &inputValue);
     if (inputValue == 1) {
         dashboard();
@@ -170,11 +170,11 @@ int readUserProfile() {
     char description[MAX_LENGTH], date[MAX_LENGTH];
 
     // Read and print information from the files
-    fscanf(userExpenseDate, "Date of Expense: %[^\n]", date);
-    fscanf(userSalary, "Monthly Salary: %f", &salary);
-    fscanf(userExpenseAmount, "Expense Amount: %f", &expense);
-    fscanf(userSaving, "Saving: %f", &saving);
-    fscanf(userExpenseDetails, "Expense Description: %[^\n]", description);
+    fscanf(userExpenseDate, "Date of Expense: %s", date);
+    fscanf(userSalary, "Monthly Salary: %.2f", &salary);
+    fscanf(userExpenseAmount, "Expense Amount: %.2f", &expense);
+    fscanf(userSaving, "Saving: %.2f", &saving);
+    fscanf(userExpenseDetails, "Expense Description: %s", description);
 
     printf("Salary: %.2f\n", salary);
     printf("Expense Details: %s\n", description);
