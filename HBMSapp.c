@@ -166,22 +166,25 @@ int readUserProfile() {
         return 1;  // Return an error code to indicate failure
     }
 
-    float salary, expense, saving;
-    char discription[MAX_LENGTH], date[MAX_LENGTH];
+    // Print header
+    printf("%-20s %-20s %-20s %-20s %-20s\n", "Date", "Monthly Salary", "Expense Amount", "Expense Details", "Saving");
 
     // Read and print information from the files
-    fscanf(userExpenseDate, "Date of Expense: %s", date);
-    fscanf(userSalary, "Monthly Salary: %f", &salary);
-    fscanf(userExpenseAmount, "Expense Amount: %f", &expense);
-    fscanf(userSaving, "Saving: %f", &saving);
-    fscanf(userExpenseDetails, "Expense Description: %s", discription);
+    while (1) {
+        char date[MAX_LENGTH];
+        float salary, expense, saving;
+        char description[MAX_LENGTH];
 
-    // Print the read values
-    printf("Salary         : %.2f\n", salary);
-    printf("Expense Details: %s\n", discription);
-    printf("Date           : %s\n", date);
-    printf("Expense        : %.2f\n", expense);
-    printf("Saving         : %.2f\n", saving);
+        // Read data from each file
+        if (fscanf(userExpenseDate, "Date of Expense: %s", date) != 1) break;
+        fscanf(userSalary, "Monthly Salary: %f", &salary);
+        fscanf(userExpenseAmount, "Expense Amount: %f", &expense);
+        fscanf(userSaving, "Saving: %f", &saving);
+        fscanf(userExpenseDetails, "Expense Description: %[^\n]", description);
+
+        // Print the read values
+        printf("%-20s %-20.2f %-20.2f %-20s %-20.2f\n", salary, date, expense, description, saving);
+    }
 
     // Close the files
     fclose(userExpenseDate);
@@ -192,6 +195,7 @@ int readUserProfile() {
 
     return 0;
 }
+
 
 // Dashboard
 int dashboard() {
