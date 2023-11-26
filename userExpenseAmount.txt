@@ -1,2 +1,2 @@
-Expense Amount: 20000.00
-Expense Amount: 1000.00
+20000.00
+1000.00

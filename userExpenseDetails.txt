@@ -1,2 +1,2 @@
-Expense Description: rent
-Expense Description: xyz
+rent
+xyz

@@ -1,2 +1,2 @@
-Monthly Salary: 50000.00
-Monthly Salary: 2200.00
+50000.00
+2200.00

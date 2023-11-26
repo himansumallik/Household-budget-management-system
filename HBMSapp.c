@@ -13,6 +13,7 @@ int readUserProfile();
 int dashboard();
 int registerUser();
 
+
 // Function to authenticate a user
 int authenticate(const char *username, const char *password) {
     // Open the file for reading
@@ -161,30 +162,41 @@ int readUserProfile() {
     FILE *userSaving = fopen("userSaving.txt", "r");
     FILE *userExpenseDetails = fopen("userExpenseDetails.txt", "r");
 
-    if (userExpenseDate == NULL || userSalary == NULL || userSaving == NULL || userExpenseDetails == NULL || userExpenseAmount == NULL) {
+    // Check if any of the files couldn't be opened
+    if (userExpenseDate == NULL || userSalary == NULL || userSaving == NULL ||
+        userExpenseDetails == NULL || userExpenseAmount == NULL) {
         printf("Error: Unable to open one or more files for reading\n");
-        return 1;  // Return an error code to indicate failure
+
+        // Close any opened files before returning
+        if (userExpenseDate != NULL) fclose(userExpenseDate);
+        if (userSalary != NULL) fclose(userSalary);
+        if (userSaving != NULL) fclose(userSaving);
+        if (userExpenseDetails != NULL) fclose(userExpenseDetails);
+        if (userExpenseAmount != NULL) fclose(userExpenseAmount);
+
+
+        return -1;  // Return an error code
     }
+
+    // Declare variables to store data
+    char date[MAX_LENGTH];
+    float salary, expense, saving;
+    char description[MAX_LENGTH];
 
     // Print header
     printf("%-20s %-20s %-20s %-20s %-20s\n", "Date", "Monthly Salary", "Expense Amount", "Expense Details", "Saving");
 
     // Read and print information from the files
-    while (1) {
-        char date[MAX_LENGTH];
-        float salary, expense, saving;
-        char description[MAX_LENGTH];
-
-        // Read data from each file
-        if (fscanf(userExpenseDate, "Date of Expense: %s", date) != 1) break;
-        fscanf(userSalary, "Monthly Salary: %f", &salary);
-        fscanf(userExpenseAmount, "Expense Amount: %f", &expense);
-        fscanf(userSaving, "Saving: %f", &saving);
-        fscanf(userExpenseDetails, "Expense Description: %[^\n]", description);
+    while (fscanf(userExpenseDate, "%s", date) ==1) {
+        fscanf(userSalary, "%f", &salary);
+        fscanf(userExpenseAmount, "%f", &expense);
+        fscanf(userSaving, "%f", &saving);
+        fscanf(userExpenseDetails, "%s", description);
 
         // Print the read values
-        printf("%-20s %-20.2f %-20.2f %-20s %-20.2f\n", salary, date, expense, description, saving);
+        printf("%-20s %-20.2f %-20.2f %-20s %-20.2f\n", date, salary, expense, description, saving);
     }
+
 
     // Close the files
     fclose(userExpenseDate);
@@ -195,6 +207,9 @@ int readUserProfile() {
 
     return 0;
 }
+
+
+
 
 
 // Dashboard
