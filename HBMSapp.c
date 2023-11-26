@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <string.h>
-
 #define MAX_LENGTH 100
 
 // Function prototypes
@@ -184,7 +183,7 @@ int readUserProfile() {
     char description[MAX_LENGTH];
 
     // Print header
-    printf("%-20s %-20s %-20s %-20s %-20s\n", "Date", "Monthly Salary", "Expense Amount", "Expense Details", "Saving");
+    printf("%-20s %-20s %-20s %-20s %-20s\n", "Monthly Salary", "Date", "Expense Amount", "Expense Details", "Saving");
 
     // Read and print information from the files
     while (fscanf(userExpenseDate, "%s", date) ==1) {
