@@ -136,8 +136,6 @@ int userProfile() {
     fprintf(userExpenseDetails, "%s\n", expenseDescription);
     fprintf(userExpenseDate, "%s\n", dateOfExpense);
 
-    dashboard();
-
     // Close the files
     fclose(userExpenseAmount);
     fclose(userExpenseDate);
@@ -145,7 +143,17 @@ int userProfile() {
     fclose(userSalary);
 
     // Display a message
+    printf("\n");
     printf("User profile saved successfully.\n");
+    printf("\n");
+
+    //display dashboard
+    int dash;
+    printf("Enter 1 to view the dashboard: ");
+    scanf("%d",&dash);
+    if(dash==1){
+        dashboard();
+    }
     return 0;
 }
 
@@ -196,8 +204,8 @@ int readUserProfile() {
     float totalExpenses = 0.0;
 
     printf("Monthly Salary: %.2f\n", initialSalary);
+    printf("-----------------------------------------------------------------\n");
     printf("\n");
-    printf("-------------------------------------------------------------------------------\n");
 
     // Print header
     printf("%-20s %-20s %-20s \n", "Date", "Expense Amount", "Expense Details");
@@ -222,8 +230,8 @@ int readUserProfile() {
     }
 
     // Print the sum of all expenses
-    printf("-------------------------------------------------------------------------------\n");
     printf("\n");
+    printf("-----------------------------------------------------------------\n");
     printf("Total Savings: %.2f\n", saving);
 
     // Close the files
@@ -240,13 +248,13 @@ int readUserProfile() {
 
 // Dashboard
 int dashboard() {
-    printf("-------------------------------------------------------------------------------\n");
-    printf("********************************DASHBOARD**************************************\n");
-    printf("-------------------------------------------------------------------------------\n");
+    printf("-----------------------------------------------------------------\n");
+    printf("************************DASHBOARD********************************\n");
+    printf("-----------------------------------------------------------------\n");
     readUserProfile();
-    printf("-------------------------------------------------------------------------------\n");
-    printf("*******************************************************************************\n");
-    printf("-------------------------------------------------------------------------------\n");
+    printf("-----------------------------------------------------------------\n");
+    printf("*****************************************************************\n");
+    printf("-----------------------------------------------------------------\n");
     return 0;
 }
 
