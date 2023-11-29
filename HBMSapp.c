@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <unistd.h> // Include the header for ftruncate
 #define MAX_LENGTH 100
 
 // Function prototypes
@@ -11,6 +12,7 @@ int userProfile();
 int readUserProfile();
 int dashboard();
 int registerUser();
+int resetFiles();
 
 
 // Function to authenticate a user
@@ -36,6 +38,8 @@ int authenticate(const char *username, const char *password) {
     fclose(file);
     return 0; // Authentication failed
 }
+
+
 
 // User signin
 int signInAuth() {
@@ -65,31 +69,39 @@ int homepage() {
     printf("\n");
     printf("||Your Dashboard|| <<<Enter 1>>>");
     printf("\n");
-    printf("||Enter New Expense|| <<<Enter 2>>>)");
-    printf("\n\n");
-    printf("Your input(1 or 2): ");
+    printf("||Update Ongoing Month Expense|| <<<Enter 2>>>)");
+    printf("\n");
+    printf("||Expense For new Month|| <<<Enter 3>>>)");
+    printf("\n");
+    printf("Your input(1 or 2 or 3): ");
     scanf("%d", &inputValue);
     if (inputValue == 1) {
         dashboard();
     } else if (inputValue == 2) {
         userProfile();
-    } else {
+    } else if (inputValue == 3){
+        resetFiles();
+        userProfile();
+    }else {
         printf("Invalid Input\n");
     }
 
     return 0;
 }
 
+
+
 // Expense calculator and user profile
 int userProfile() {
     printf("WELCOME TO THE HOUSEHOLD BUDGET MANAGEMENT SYSTEM\n");
+    printf("\n");
 
     // Declare variables to store user inputs
     float monthlySalary, expenseAmount;
     char expenseDescription[MAX_LENGTH], dateOfExpense[MAX_LENGTH];
 
     // Get user inputs
-    printf("Enter your monthly salary: ");
+    printf("Enter your monthly salary(Enter 0 if updating the expense): ");
     scanf("%f", &monthlySalary);
 
     printf("Enter expense amount: ");
@@ -156,6 +168,8 @@ int userProfile() {
     }
     return 0;
 }
+
+
 
 // Read user profile
 int readUserProfile() {
@@ -244,8 +258,6 @@ int readUserProfile() {
 }
 
 
-
-
 // Dashboard
 int dashboard() {
     printf("-----------------------------------------------------------------\n");
@@ -257,6 +269,64 @@ int dashboard() {
     printf("-----------------------------------------------------------------\n");
     return 0;
 }
+
+
+// delete all the content of txt files
+int resetFiles() {
+    FILE *userExpenseDate = fopen("userExpenseDate.txt", "w");
+    FILE *userExpenseAmount = fopen("userExpenseAmount.txt", "w");
+    FILE *userSalary = fopen("userSalary.txt", "w");
+    FILE *userExpenseDetails = fopen("userExpenseDetails.txt", "w");
+
+    // Check if any of the files couldn't be opened for writing
+    if (userExpenseDate == NULL || userSalary == NULL ||
+        userExpenseDetails == NULL || userExpenseAmount == NULL) {
+        printf("Error: Unable to open one or more files for writing\n");
+
+        // Close any opened files before returning
+        if (userExpenseDate != NULL) fclose(userExpenseDate);
+        if (userSalary != NULL) fclose(userSalary);
+        if (userExpenseDetails != NULL) fclose(userExpenseDetails);
+        if (userExpenseAmount != NULL) fclose(userExpenseAmount);
+
+        return -1;  // Return an error code
+    }
+
+    // Close the files after truncating them to zero size
+    if (ftruncate(fileno(userExpenseDate), 0) != 0) {
+        printf("Error: Failed to truncate userExpenseDate.txt\n");
+        fclose(userExpenseDate);
+        return -2;  // Return an error code
+    }
+    fclose(userExpenseDate);
+
+    if (ftruncate(fileno(userExpenseAmount), 0) != 0) {
+        printf("Error: Failed to truncate userExpenseAmount.txt\n");
+        fclose(userExpenseAmount);
+        return -3;  // Return an error code
+    }
+    fclose(userExpenseAmount);
+
+    if (ftruncate(fileno(userSalary), 0) != 0) {
+        printf("Error: Failed to truncate userSalary.txt\n");
+        fclose(userSalary);
+        return -4;  // Return an error code
+    }
+    fclose(userSalary);
+
+    if (ftruncate(fileno(userExpenseDetails), 0) != 0) {
+        printf("Error: Failed to truncate userExpenseDetails.txt\n");
+        fclose(userExpenseDetails);
+        return -5;  // Return an error code
+    }
+    fclose(userExpenseDetails);
+
+    printf("Files reset successfully.\n");
+
+    return 0;  // Return success code
+}
+
+
 
 // New User registration
 int registerUser() {
@@ -282,6 +352,8 @@ int registerUser() {
     }
     return 0;
 }
+
+
 
 // Main function
 int main() {
